@@ -385,3 +385,381 @@ footer {
 }
 
 
+@media (max-width: 900px) {
+    .links {
+        justify-content: flex-start;
+        overflow-x: auto;
+        padding-bottom: 3px;
+    }
+
+    .links::-webkit-scrollbar {
+        height: 4px;
+    }
+
+    .links::-webkit-scrollbar-thumb {
+        background: #d8d6ff;
+        border-radius: 10px;
+    }
+
+    .link {
+        flex-shrink: 0;
+    }
+}
+
+@media (max-width: 550px) {
+    header {
+        height: 75px;
+        padding: 0 20px;
+    }
+
+    .logo {
+        gap: 10px;
+    }
+
+    .logo-icon {
+        width: 42px;
+        height: 42px;
+        border-radius: 12px;
+    }
+
+    .logo-icon i {
+        font-size: 22px;
+    }
+
+    .logo-text h2 {
+        font-size: 16px;
+    }
+
+    .logo-text p {
+        font-size: 10px;
+    }
+
+    .theme {
+        width: 40px;
+        height: 40px;
+        border-radius: 11px;
+    }
+
+    footer {
+        padding: 12px 15px;
+    }
+
+    .links {
+        gap: 7px;
+    }
+
+    .link {
+        min-width: auto;
+        padding: 10px 13px;
+        flex-direction: column;
+        gap: 3px;
+    }
+
+    .link i {
+        font-size: 19px;
+    }
+
+    .link p {
+        font-size: 9px;
+    }
+}
+
+.clock {
+    width: min(90%, 500px);
+    margin: auto;
+
+    padding: 35px 45px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(255, 255, 255, 0.14);
+
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 28px;
+
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow:
+        0 18px 45px rgba(0, 0, 0, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+
+/* Date */
+
+.date {
+    margin-bottom: 7px;
+
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+
+    color: rgba(255, 255, 255, 0.85);
+}
+
+/* Time */
+
+.time h1 {
+    font-size: clamp(3rem, 8vw, 6.5rem);
+    font-weight: 700;
+    line-height: 1;
+
+    letter-spacing: -4px;
+
+    color: white;
+
+    text-shadow:
+        0 5px 20px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 550px) {
+    .clock {
+        width: 90%;
+        padding: 28px 15px;
+
+        border-radius: 22px;
+    }
+
+    .date {
+        font-size: 11px;
+        letter-spacing: 1px;
+    }
+
+    .time h1 {
+        font-size: clamp(3rem, 15vw, 5rem);
+        letter-spacing: -2px;
+    }
+}
+
+/* ================= WEATHER ================= */
+
+.weather {
+    width: min(92%, 1000px);
+    margin: 0 auto;
+
+    padding: 25px 30px;
+
+    background: rgba(255, 255, 255, 0.12);
+
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    border-radius: 26px;
+
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    box-shadow:
+        0 18px 45px rgba(0, 0, 0, 0.16),
+        inset 0 1px 0 rgba(255, 255, 255, 0.25);
+
+    color: white;
+}
+
+/* Location */
+
+.locationName {
+    margin-bottom: 15px;
+
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 1px;
+
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* Temperature and weather description */
+
+.tempratureAndDescription {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    margin-bottom: 25px;
+}
+
+.temprature {
+    font-size: clamp(3.5rem, 7vw, 5.5rem);
+    font-weight: 700;
+    line-height: 1;
+
+    letter-spacing: -4px;
+
+    color: white;
+
+    text-shadow:
+        0 5px 20px rgba(0, 0, 0, 0.2);
+}
+
+.description {
+    padding: 8px 15px;
+
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: capitalize;
+
+    color: white;
+
+    background: rgba(255, 255, 255, 0.14);
+
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50px;
+}
+
+/* Weather data cards */
+
+.data-cards {
+    display: grid;
+
+    grid-template-columns:
+        repeat(5, minmax(120px, 1fr));
+
+    gap: 12px;
+}
+
+.weatherDataCard {
+    min-height: 115px;
+    padding: 17px 12px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(255, 255, 255, 0.1);
+
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 18px;
+
+    transition:
+        transform 0.25s ease,
+        background 0.25s ease;
+}
+
+.weatherDataCard:hover {
+    background: rgba(255, 255, 255, 0.18);
+
+    transform: translateY(-5px);
+}
+
+/* Weather icons */
+
+.weatherDataCard i {
+    width: 40px;
+    height: 40px;
+
+    margin-bottom: 8px;
+
+    display: grid;
+    place-items: center;
+
+    font-size: 22px;
+
+    color: #ffffff;
+
+    background: rgba(255, 255, 255, 0.14);
+
+    border-radius: 13px;
+}
+
+/* Weather value */
+
+.weatherDataCard h3 {
+    margin-bottom: 5px;
+
+    font-size: 17px;
+    font-weight: 700;
+
+    color: white;
+}
+
+/* Weather label */
+
+.weatherDataCard p {
+    font-size: 9px;
+    font-weight: 600;
+
+    letter-spacing: 1px;
+
+    color: rgba(255, 255, 255, 0.65);
+}
+
+/* ================= TABLET ================= */
+
+@media (max-width: 850px) {
+    .data-cards {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 550px) {
+    .weather {
+        width: 92%;
+
+        padding: 20px 15px;
+
+        border-radius: 22px;
+    }
+
+    .locationName {
+        font-size: 12px;
+    }
+
+    .tempratureAndDescription {
+        gap: 10px;
+
+        margin-bottom: 20px;
+    }
+
+    .temprature {
+        font-size: 3.5rem;
+
+        letter-spacing: -2px;
+    }
+
+    .description {
+        padding: 6px 11px;
+
+        font-size: 10px;
+    }
+
+    .data-cards {
+        grid-template-columns: repeat(2, 1fr);
+
+        gap: 9px;
+    }
+
+    .weatherDataCard {
+        min-height: 100px;
+
+        padding: 12px 8px;
+
+        border-radius: 15px;
+    }
+
+    .weatherDataCard i {
+        width: 35px;
+        height: 35px;
+
+        font-size: 19px;
+
+        border-radius: 11px;
+    }
+
+    .weatherDataCard h3 {
+        font-size: 14px;
+    }
+
+    .weatherDataCard p {
+        font-size: 8px;
+    }
+
+    /* Last card takes full width */
+
+    .weatherDataCard:last-child {
+        grid-column: span 2;
+    }
+}
