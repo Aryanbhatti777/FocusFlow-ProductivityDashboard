@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Focus Flow | Productivity Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link
+  href="https://cdn.jsdelivr.net/npm/remixicon@4.9.0/fonts/remixicon.css"
+  rel="stylesheet"
+/>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <div class="logo-icon">
+                <i class="ri-flashlight-line"></i>
+            </div>
+            <div class="logo-text">
+                <h2>Focus Flow</h2>
+                <p>Productivity Dashboard</p>
+            </div>
+        </div>
+
+        <div class="theme">
+            <i class="ri-moon-line themeIcon"></i>
+        </div>
+    </header>
+
+    <div class="clock">
+    <div class="date"></div>
+
+    <div class="time">
+        <h1></h1>
+    </div>
+</div>
+
+<div class="weather">
+
+    <p class="locationName">
+        Fetching Location...
+    </p>
+
+    <div class="tempratureAndDescription">
+        <h1 class="temprature">
+            -- <sup>.</sup>c
+        </h1>
+        <p class="description">Fetching Weather...</p>
+    </div>
+
+    <div class="data-cards">
+        <div class="weatherDataCard">
+            <i class="ri-drop-fill"></i>
+            <h3 class="humidity"></h3>
+            <p>HUMIDITY</p>
+        </div>
+        <div class="weatherDataCard">
+            <i class="ri-windy-line"></i>
+            <h3 class="wind"></h3>
+            <p>WIND</p>
+        </div>
+        <div class="weatherDataCard">
+            <i class="ri-temp-hot-line"></i>
+            <h3 class="feelsLike"></h3>
+            <p>FEELS LIKE</p>
+        </div>
+        <div class="weatherDataCard">
+            <i class="ri-heavy-showers-line"></i>
+            <h3 class="percipitation"></h3>
+            <p>PERCIPITATION</p>
+        </div>
+        <div class="weatherDataCard">
+            <i class="ri-sun-fill"></i>
+            <h3 class="visibility"></h3>
+            <p>VISIBILITY</p>
+        </div>
+    </div>
+</div>
+
+    <footer>
+        <nav>
+            <div class="links">
+                <div class="link active">
+                    <i class="ri-todo-line"></i>
+                    <p>Todo</p>
+                </div>
+                <div class="link">
+                    <i class="ri-todo-line"></i>
+                    <p>Daily Planner</p>
+                </div>
+                <div class="link">
+                    <i class="ri-double-quotes-l"></i>
+                    <p>Motivation Quotes</p>
+                </div>
+                <div class="link">
+                    <i class="ri-timer-line"></i>
+                    <p>Pomodoro Timer</p>
+                </div>
+                <div class="link">
+                    <i class="ri-focus-2-line"></i>
+                    <p>Daily Goals</p>
+                </div>
+            </div>
+        </nav>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
