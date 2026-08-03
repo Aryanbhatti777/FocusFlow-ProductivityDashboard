@@ -408,6 +408,17 @@ const deletePlan = (planId) => {
   displayPlanners();
 };
 
+const completePlan = (planId) => {
+  let planners = getPlanners();
+
+  planners = planners.map((plan) =>
+    plan.id == planId ? { ...plan, completed: !plan.completed } : plan,
+  );
+
+  localStorage.setItem("planner", JSON.stringify(planners));
+
+  displayPlanners();
+};
 
 
 displayTasks();
