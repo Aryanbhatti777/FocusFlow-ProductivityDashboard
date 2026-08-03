@@ -107,3 +107,20 @@ const displayWeatherData = (data) => {
     document.querySelector(".visibility").innerHTML = `${data.visibility / 1000} kms`
 }
 
+const todoPage = document.querySelector(".todo");
+const closeTodo = document.querySelector(".close-todo");
+const todoIcon = document.querySelector(".todo-icon");
+
+todoIcon.addEventListener("click", () => {
+
+    todoPage.classList.add("active");
+    document.body.style.overflow = "hidden";
+
+});
+
+closeTodo.addEventListener("click", () => {
+
+    todoPage.classList.remove("active");
+    document.body.style.overflow = "";
+
+});
