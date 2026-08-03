@@ -1,7 +1,7 @@
 const getTasks = () => {
-  const tasks = JSON.parse(localStorage.getItem("todoTasks")) || [];
+  const planners = JSON.parse(localStorage.getItem("todoTasks")) || [];
 
-  return tasks;
+  return planners;
 };
 
 const getPlanners = () => {
@@ -149,7 +149,7 @@ taskForm.addEventListener("submit", (e) => {
   const task = taskForm.task.value.trim();
   const description = taskForm.description.value.trim();
   const category = taskForm.category.value.trim();
-  const tasks = getTasks();
+  const planners = getTasks();
 
   if (!task || !description || !category) {
     alert("All fields are mandatory.");
@@ -163,25 +163,25 @@ taskForm.addEventListener("submit", (e) => {
     completed: false,
   };
 
-  tasks.push(newTask);
+  planners.push(newTask);
 
-  localStorage.setItem("todoTasks", JSON.stringify(tasks));
+  localStorage.setItem("todoTasks", JSON.stringify(planners));
 
   displayTasks();
 
   taskForm.reset();
 });
 
-const displayTasks = (tasks = getTasks()) => {
+const displayTasks = (planners = getTasks()) => {
   const tasksDiv = document.querySelector(".tasks");
   tasksDiv.innerHTML = "";
 
-  if (tasks.length === 0) {
+  if (planners.length === 0) {
     tasksDiv.innerHTML = "<p>No Tasks added yet.</p>";
   }
   const taskCount = document.querySelector(".task-count span");
-  taskCount.innerHTML = tasks.length;
-  tasks.forEach((task) => {
+  taskCount.innerHTML = planners.length;
+  planners.forEach((task) => {
     let div = document.createElement("div");
     div.classList.add("task");
     if (task.completed) {
@@ -241,10 +241,10 @@ document.querySelector(".search-btn").addEventListener("click", () => {
 });
 
 const filterTasks = () => {
-  const tasks = getTasks();
+  const planners = getTasks();
   const searchInput = document.querySelector(".search").value.toLowerCase();
 
-  const filtered = tasks.filter(
+  const filtered = planners.filter(
     (t) =>
       t.task.toLowerCase().includes(searchInput) ||
       t.description.toLowerCase().includes(searchInput) ||
@@ -261,8 +261,8 @@ document.querySelector(".all").addEventListener("click", () => {
 // delete Tasks
 
 const deleteTask = (taskId) => {
-  let tasks = getTasks();
-  const remainingTasks = tasks.filter((t) => t.id !== taskId);
+  let planners = getTasks();
+  const remainingTasks = planners.filter((t) => t.id !== taskId);
   localStorage.setItem("todoTasks", JSON.stringify(remainingTasks));
 
   displayTasks();
@@ -271,13 +271,13 @@ const deleteTask = (taskId) => {
 // complete Tasks
 
 const completeTask = (taskId) => {
-  let tasks = getTasks();
+  let planners = getTasks();
 
-  tasks = tasks.map((task) =>
+  planners = planners.map((task) =>
     task.id == taskId ? { ...task, completed: !task.completed } : task,
   );
 
-  localStorage.setItem("todoTasks", JSON.stringify(tasks));
+  localStorage.setItem("todoTasks", JSON.stringify(planners));
 
   displayTasks();
 };
@@ -301,6 +301,8 @@ closePlanner.addEventListener("click", () => {
 // daily planner working
 
 const plannerForm = document.querySelector("#plannerForm");
+
+// add plans
 
 plannerForm.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -331,6 +333,8 @@ plannerForm.addEventListener("submit", (e) => {
   plannerForm.reset();
 });
 
+// display planners
+
 const displayPlanners = () => {
   const plannersDiv = document.querySelector(".planner-timeline");
   plannersDiv.innerHTML = "";
@@ -340,9 +344,13 @@ const displayPlanners = () => {
   plannerCount.innerHTML = planners.length;
 
   planners.forEach((plan) => {
-
-    const plannerHTML = `
-    <div class="planner-item">
+    const div = document.createElement("div");
+    div.classList.add("planner-item");
+    if (plan.completed) {
+      div.classList.add("completed");
+    }
+    div.innerHTML = `
+    
         <div class="planner-time">
             ${plan.time}
         </div>
@@ -376,12 +384,31 @@ const displayPlanners = () => {
                 ${plan.completed ? "Completed" : "Mark as Complete"}
             </button>
         </div>
-    </div>
 `;
 
-    plannersDiv.innerHTML += plannerHTML;
+    div.querySelector(".delete-plan").addEventListener("click", () => {
+      deletePlan(plan.id);
+    });
+
+    div.querySelector(".complete-plan").addEventListener("click", () => {
+      completePlan(plan.id);
+    });
+
+    plannersDiv.append(div);
   });
 };
+
+// delete plan
+
+const deletePlan = (planId) => {
+  let planners = getPlanners();
+  const remainingPlanners = planners.filter((p) => p.id !== planId);
+  localStorage.setItem("planner", JSON.stringify(remainingPlanners));
+
+  displayPlanners();
+};
+
+
 
 displayTasks();
 displayPlanners();
