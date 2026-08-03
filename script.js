@@ -3,6 +3,12 @@ const getTasks = () => {
 
   return tasks;
 };
+
+const getPlanners = () => {
+  const planners = JSON.parse(localStorage.getItem("planner")) || [];
+
+  return planners;
+};
 // Theme
 
 const theme = document.querySelector(".theme");
@@ -279,21 +285,103 @@ const completeTask = (taskId) => {
 // daily planner closing opening
 
 const plannerPage = document.querySelector(".daily-planner");
-
 const plannerIcon = document.querySelector(".planner-icon");
-
 const closePlanner = document.querySelector(".close-planner");
 
 plannerIcon.addEventListener("click", () => {
   plannerPage.classList.add("active");
-
   document.body.style.overflow = "hidden";
 });
 
 closePlanner.addEventListener("click", () => {
   plannerPage.classList.remove("active");
-
   document.body.style.overflow = "";
 });
 
+// daily planner working
+
+const plannerForm = document.querySelector("#plannerForm");
+
+plannerForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  const planners = getPlanners();
+  const time = plannerForm.time.value.trim();
+  const plan = plannerForm.plan.value.trim();
+  const category = plannerForm.category.value.trim();
+
+  if (!time || !plan || !category) {
+    alert("All fields are mandatory.");
+  }
+
+  const newPlanner = {
+    id: Date.now(),
+    time,
+    plan,
+    category,
+    completed: false,
+  };
+
+  planners.push(newPlanner);
+
+  localStorage.setItem("planner", JSON.stringify(planners));
+
+  displayPlanners();
+
+  plannerForm.reset();
+});
+
+const displayPlanners = () => {
+  const plannersDiv = document.querySelector(".planner-timeline");
+  plannersDiv.innerHTML = "";
+
+  const planners = getPlanners();
+  const plannerCount = document.querySelector(".total-hours");
+  plannerCount.innerHTML = planners.length;
+
+  planners.forEach((plan) => {
+
+    const plannerHTML = `
+    <div class="planner-item">
+        <div class="planner-time">
+            ${plan.time}
+        </div>
+        <div class="planner-line">
+            <span class="planner-dot"></span>
+        </div>
+        <div class="planner-task">
+            <div class="planner-task-top">
+                <span class="planner-category">
+                    <i class="ri-folder-line"></i>
+                    ${plan.category}
+                </span>
+                <button
+                    type="button"
+                    class="delete-plan"
+                    aria-label="Delete plan">
+                    <i class="ri-delete-bin-line"></i>
+                </button>
+            </div>
+            <h3>
+                ${plan.plan}
+            </h3>
+            <button
+                type="button"
+                class="complete-plan">
+                <i class="${
+                  plan.completed
+                    ? "ri-checkbox-circle-fill"
+                    : "ri-checkbox-circle-line"
+                }"></i>
+                ${plan.completed ? "Completed" : "Mark as Complete"}
+            </button>
+        </div>
+    </div>
+`;
+
+    plannersDiv.innerHTML += plannerHTML;
+  });
+};
+
 displayTasks();
+displayPlanners();
