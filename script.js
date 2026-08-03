@@ -133,6 +133,10 @@ closeTodo.addEventListener("click", () => {
 
 const taskForm = document.querySelector("#taskForm");
 
+document.querySelector(".cancel").addEventListener("click",() =>{
+    taskForm.reset()
+})
+
 taskForm.addEventListener("submit", (e) => {
     e.preventDefault();
 
@@ -171,6 +175,9 @@ const displayTasks = () => {
     tasks.forEach((task) => {
         let div = document.createElement("div");
         div.classList.add("task");
+        if (task.completed) {
+            div.classList.add("completed");
+        }
 
         div.innerHTML = `
         <div class="task-top">
@@ -198,7 +205,7 @@ const displayTasks = () => {
                 : "ri-checkbox-circle-line"
             }"></i>
 
-                ${task.completed ? "Completed" : "Complete"}
+                ${task.completed ? "Undo" : "Complete"}
 
             </button>
 
@@ -207,6 +214,10 @@ const displayTasks = () => {
 
         div.querySelector(".delete-task").addEventListener("click", () => {
             deleteTask(task.id);
+        });
+
+        div.querySelector(".complete-task").addEventListener("click", () => {
+            completeTask(task.id);
         });
 
         tasksDiv.append(div);
@@ -220,5 +231,16 @@ const deleteTask = (taskId) => {
 
     displayTasks();
 };
+
+const completeTask = (taskId) => {
+
+    let tasks = getTasks();
+    
+    tasks = tasks.map(task => task.id == taskId ? {...task, completed: !task.completed} : task)
+
+    localStorage.setItem("todoTasks", JSON.stringify(tasks))
+
+    displayTasks()
+}
 
 displayTasks();

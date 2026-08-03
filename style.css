@@ -1381,7 +1381,7 @@ body.dark .task:hover {
 }
 
 .task.completed {
-    opacity: 0.65;
+    opacity: 0.70;
 
     border-color:
         var(--primary);
