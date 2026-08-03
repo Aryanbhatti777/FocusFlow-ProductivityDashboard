@@ -166,8 +166,7 @@ taskForm.addEventListener("submit", (e) => {
     taskForm.reset();
 });
 
-const displayTasks = () => {
-    const tasks = getTasks();
+const displayTasks = (tasks = getTasks()) => {
     const tasksDiv = document.querySelector(".tasks");
     tasksDiv.innerHTML = "";
     const taskCount = document.querySelector(".task-count span");
@@ -224,6 +223,28 @@ const displayTasks = () => {
     });
 };
 
+// Filter Tasks
+
+document.querySelector(".search-btn").addEventListener("click", () => {
+    filterTasks()
+})
+
+const filterTasks = () => {
+    const tasks = getTasks()
+    const searchInput = document.querySelector(".search").value.toLowerCase()
+    
+
+    const filtered = tasks.filter(t => t.task.toLowerCase().includes(searchInput) || t.description.toLowerCase().includes(searchInput) || t.category.toLowerCase().includes(searchInput))
+
+    displayTasks(filtered)
+}
+
+document.querySelector(".all").addEventListener("click", () => {
+    displayTasks(getTasks())
+})
+
+// delete Tasks
+
 const deleteTask = (taskId) => {
     let tasks = getTasks();
     const remainingTasks = tasks.filter((t) => t.id !== taskId);
@@ -231,6 +252,8 @@ const deleteTask = (taskId) => {
 
     displayTasks();
 };
+
+// complete Tasks
 
 const completeTask = (taskId) => {
 
