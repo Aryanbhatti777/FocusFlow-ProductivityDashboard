@@ -1,769 +1,679 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 :root {
-    --primary: #6c63ff;
-    --primary-light: #eeecff;
-    --text: #202124;
-    --muted: #74747c;
-    --border: #e8e8ed;
-    --white: #ffffff;
-    --background: #f6f7fb;
+  --primary: #6c63ff;
+  --primary-light: #eeecff;
+  --text: #202124;
+  --muted: #74747c;
+  --border: #e8e8ed;
+  --white: #ffffff;
+  --background: #f6f7fb;
 }
 
 body {
-    min-height: 100vh;
-    font-family: "Inter", sans-serif;
-    background-image: url("./assets/morning.jpg");
-    background-position: center;
-    background-size: cover;
-    color: var(--text);
+  min-height: 100vh;
+  font-family: "Inter", sans-serif;
+  background-image: url("./assets/morning.jpg");
+  background-position: center;
+  background-size: cover;
+  color: var(--text);
 
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 
-    user-select: none;
-    -webkit-user-select: none;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 input,
 textarea,
 [contenteditable="true"] {
-    user-select: text;
-    -webkit-user-select: text;
+  user-select: text;
+  -webkit-user-select: text;
 }
 
-
 body.dark {
-    --primary: #9a94ff;
-    --primary-light: #252241;
-    --text: #f5f5f7;
-    --muted: #b0afbb;
-    --border: rgba(255, 255, 255, 0.12);
-    --white: rgba(35, 35, 45, 0.75);
+  --primary: #9a94ff;
+  --primary-light: #252241;
+  --text: #f5f5f7;
+  --muted: #b0afbb;
+  --border: rgba(255, 255, 255, 0.12);
+  --white: rgba(35, 35, 45, 0.75);
 
-    color: var(--text);
+  color: var(--text);
 
-    position: relative;
-    isolation: isolate;
+  position: relative;
+  isolation: isolate;
 }
 
 body.dark::before {
-    content: "";
+  content: "";
 
-    position: fixed;
-    inset: 0;
+  position: fixed;
+  inset: 0;
 
-    background: rgba(5, 6, 12, 0.078);
+  background: rgba(5, 6, 12, 0.078);
 
-    z-index: -1;
+  z-index: -1;
 }
-
-/* Header glass */
 
 body.dark header {
-    background: rgba(15, 16, 25, 0.5);
+  background: rgba(15, 16, 25, 0.5);
 
-    border-bottom-color: rgba(255, 255, 255, 0.1);
+  border-bottom-color: rgba(255, 255, 255, 0.1);
 
-    box-shadow:
-        0 8px 30px rgba(0, 0, 0, 0.2),
-        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  box-shadow:
+    0 8px 30px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
-/* Logo text */
-
 body.dark .logo-text h2 {
-    color: #ffffff;
+  color: #ffffff;
 }
 
 body.dark .logo-text p {
-    color: #aaaab5;
+  color: #aaaab5;
 }
 
-/* Theme button */
-
 body.dark .theme {
-    color: #ffffff;
+  color: #ffffff;
 
-    background: rgba(30, 30, 42, 0.7);
+  background: rgba(30, 30, 42, 0.7);
 
-    border-color: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.12);
 
-    box-shadow:
-        0 5px 18px rgba(0, 0, 0, 0.25),
-        inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  box-shadow:
+    0 5px 18px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
 
 body.dark .theme i {
-    color: #ffd76a;
+  color: #ffd76a;
 }
 
 body.dark .theme:hover {
-    background: rgba(55, 52, 90, 0.8);
+  background: rgba(55, 52, 90, 0.8);
 
-    border-color: #8b83ff;
+  border-color: #8b83ff;
 }
-
-/* Footer glass */
 
 body.dark footer {
-    background: rgba(15, 16, 25, 0.35);
+  background: rgba(15, 16, 25, 0.35);
 
-    border-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.1);
 
-    box-shadow:
-        0 15px 40px rgba(0, 0, 0, 0.35),
-        inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  box-shadow:
+    0 15px 40px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
-
-/* App icon */
 
 body.dark .link i {
-    color: #aaa5ff;
+  color: #aaa5ff;
 
-    background:
-        linear-gradient(
-            145deg,
-            rgba(55, 55, 70, 0.9),
-            rgba(25, 25, 35, 0.9)
-        );
+  background: linear-gradient(
+    145deg,
+    rgba(55, 55, 70, 0.9),
+    rgba(25, 25, 35, 0.9)
+  );
 
-    border-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.1);
 
-    box-shadow:
-        0 7px 18px rgba(0, 0, 0, 0.45),
-        inset 0 1px 0 rgba(255, 255, 255, 0.07);
+  box-shadow:
+    0 7px 18px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.07);
 }
-
-/* App name */
 
 body.dark .link p {
-    color: #d4d3dc;
+  color: #d4d3dc;
 }
-
-/* Hover */
 
 body.dark .link:hover i {
-    color: white;
+  color: white;
 
-    background:
-        linear-gradient(
-            135deg,
-            #8981ff,
-            #5549e8
-        );
+  background: linear-gradient(135deg, #8981ff, #5549e8);
 
-    box-shadow:
-        0 13px 25px rgba(70, 60, 230, 0.4),
-        inset 0 1px 0 rgba(255, 255, 255, 0.18);
+  box-shadow:
+    0 13px 25px rgba(70, 60, 230, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
 }
 
-/* Active app */
-
 body.dark .active i {
-    color: white;
+  color: white;
 
-    background:
-        linear-gradient(
-            135deg,
-            #968fff,
-            #5b50ed
-        );
+  background: linear-gradient(135deg, #968fff, #5b50ed);
 
-    box-shadow:
-        0 9px 25px rgba(100, 90, 255, 0.45);
+  box-shadow: 0 9px 25px rgba(100, 90, 255, 0.45);
 }
 
 body.dark .active p {
-    color: #b8b3ff;
+  color: #b8b3ff;
 }
 
-
-
 header {
-    width: 100%;
-    height: 85px;
-    padding: 0 6%;
-    background: rgba(255, 251, 251, 0.155);
-    border-bottom: 1px solid var(--border);
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  width: 100%;
+  height: auto;
+  padding: 0.6rem 4rem;
+  background: rgba(255, 251, 251, 0.155);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .logo {
-    display: flex;
-    align-items: center;
-    gap: 13px;
+  display: flex;
+  align-items: center;
+  gap: 13px;
 }
 
 .logo-icon {
-    width: 48px;
-    height: 48px;
-    border-radius: 14px;
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-    background: linear-gradient(
-        135deg,
-        #766dff,
-        #5549e8
-    );
+  background: linear-gradient(135deg, #766dff, #5549e8);
 
-    color: white;
-    box-shadow: 0 8px 20px rgba(108, 99, 255, 0.25);
+  color: white;
+  box-shadow: 0 8px 20px rgba(108, 99, 255, 0.25);
 }
 
 .logo-icon i {
-    font-size: 25px;
+  font-size: 25px;
 }
 
 .logo-text h2 {
-    font-size: 19px;
-    font-weight: 700;
-    letter-spacing: -0.5px;
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
 }
 
 .logo-text p {
-    margin-top: 3px;
-    font-size: 12px;
-    color: var(--muted);
+  margin-top: 3px;
+  font-size: 12px;
+  color: var(--muted);
 }
 
 .theme {
-    width: 45px;
-    height: 45px;
-    border: 1px solid var(--border);
-    border-radius: 13px;
-    background: var(--white);
-    cursor: pointer;
+  width: 45px;
+  height: 45px;
+  border: 1px solid var(--border);
+  border-radius: 13px;
+  background: var(--white);
+  cursor: pointer;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-    transition: 0.3s ease;
+  transition: 0.3s ease;
 }
 
 .theme i {
-    font-size: 21px;
-    color: var(--text);
+  font-size: 21px;
+  color: var(--text);
 }
 
 .theme:hover {
-    color: var(--primary);
-    border-color: var(--primary);
-    background: var(--primary-light);
-    transform: rotate(30deg);
+  color: var(--primary);
+  border-color: var(--primary);
+  background: var(--primary-light);
+  transform: rotate(30deg);
 }
 
 .theme:hover i {
-    color: var(--primary);
+  color: var(--primary);
 }
 
 footer {
-    width: min(92%, 1100px);
+  width: min(85%, 800px);
 
-    margin: auto auto 25px;
-    padding: 14px 20px;
+  margin: auto auto 25px;
+  padding: 10px;
 
-    background: rgba(255, 255, 255, 0.0);
+  background: rgba(255, 255, 255, 0);
 
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 22px;
 
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
 }
 
 .links {
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    /* gap: 50px; */
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
 }
 
 .link {
-    width: 82px;
-    min-width: 82px;
-    padding: 8px 5px;
+  width: 82px;
+  min-width: 82px;
+  padding: 8px 5px;
 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
 
-    background: transparent;
-    border-radius: 15px;
+  background: transparent;
+  border-radius: 15px;
 
-    color: var(--muted);
-    cursor: pointer;
+  color: var(--muted);
+  cursor: pointer;
 
-    transition:
-        background 0.25s ease,
-        transform 0.25s ease,
-        color 0.25s ease;
+  transition:
+    background 0.25s ease,
+    transform 0.25s ease,
+    color 0.25s ease;
 }
 
 .link i {
+  display: grid;
+  place-items: center;
 
-    display: grid;
-    place-items: center;
+  padding: 0.5rem;
 
-    padding: 0.5rem;
+  font-size: 30px;
+  color: #4f46e5;
 
-    font-size: 45px;
-    color: #4f46e5;
+  background: rgba(255, 255, 255, 0.7);
 
-    background: rgba(255, 255, 255, 0.7);
+  border-radius: 15px;
 
-    border-radius: 15px;
-
-
-    transition:
-        transform 0.25s ease,
-        box-shadow 0.25s ease,
-        background 0.25s ease;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
 }
 
 .link p {
-    font-size: 14px;
-    font-weight: 600;
-    color: white;
-    text-align: center;
-    white-space: nowrap;
+  font-size: 14px;
+  font-weight: 600;
+  color: white;
+  text-align: center;
+  white-space: nowrap;
 }
 
-/* Hover animation */
-
 .link:hover {
-    color: var(--primary);
+  color: var(--primary);
 }
 
 .link:hover i {
-    transform: translateY(-7px) scale(1.08);
-    color: white;
-     background: linear-gradient(
-        135deg,
-        #7c73ff,
-        #5146e5
-    );
+  transform: translateY(-7px) scale(1.08);
+  color: white;
+  background: linear-gradient(135deg, #7c73ff, #5146e5);
 
-    box-shadow:
-        0 12px 22px rgba(70, 65, 150, 0.2),
-        inset 0 1px 2px white;
+  box-shadow:
+    0 12px 22px rgba(70, 65, 150, 0.2),
+    inset 0 1px 2px white;
 }
-
-/* Active app */
-
-.active i {
-    color: white;
-
-    background: linear-gradient(
-        135deg,
-        #7c73ff,
-        #5146e5
-    );
-
-    box-shadow:
-        0 8px 20px rgba(81, 70, 229, 0.35);
-}
-
-.active p {
-    color: var(--primary-light);
-}
-
 
 @media (max-width: 900px) {
-    .links {
-        justify-content: flex-start;
-        overflow-x: auto;
-        padding-bottom: 3px;
-    }
+  .links {
+    justify-content: flex-start;
+    overflow-x: auto;
+    padding-bottom: 3px;
+  }
 
-    .links::-webkit-scrollbar {
-        height: 4px;
-    }
+  .links::-webkit-scrollbar {
+    height: 4px;
+  }
 
-    .links::-webkit-scrollbar-thumb {
-        background: #d8d6ff;
-        border-radius: 10px;
-    }
+  .links::-webkit-scrollbar-thumb {
+    background: #d8d6ff;
+    border-radius: 10px;
+  }
 
-    .link {
-        flex-shrink: 0;
-    }
+  .link {
+    flex-shrink: 0;
+  }
 }
 
 @media (max-width: 550px) {
-    header {
-        height: 75px;
-        padding: 0 20px;
-    }
+  header {
+    height: 75px;
+    padding: 0 20px;
+  }
 
-    .logo {
-        gap: 10px;
-    }
+  .logo {
+    gap: 10px;
+  }
 
-    .logo-icon {
-        width: 42px;
-        height: 42px;
-        border-radius: 12px;
-    }
+  .logo-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+  }
 
-    .logo-icon i {
-        font-size: 22px;
-    }
+  .logo-icon i {
+    font-size: 22px;
+  }
 
-    .logo-text h2 {
-        font-size: 16px;
-    }
+  .logo-text h2 {
+    font-size: 16px;
+  }
 
-    .logo-text p {
-        font-size: 10px;
-    }
+  .logo-text p {
+    font-size: 10px;
+  }
 
-    .theme {
-        width: 40px;
-        height: 40px;
-        border-radius: 11px;
-    }
+  .theme {
+    width: 40px;
+    height: 40px;
+    border-radius: 11px;
+  }
 
-    footer {
-        padding: 12px 15px;
-    }
+  footer {
+    padding: 12px 15px;
+  }
 
-    .links {
-        gap: 7px;
-    }
+  .links {
+    gap: 7px;
+  }
 
-    .link {
-        min-width: auto;
-        padding: 10px 13px;
-        flex-direction: column;
-        gap: 3px;
-    }
+  .link {
+    min-width: auto;
+    padding: 10px 13px;
+    flex-direction: column;
+    gap: 3px;
+  }
 
-    .link i {
-        font-size: 19px;
-    }
+  .link i {
+    font-size: 19px;
+  }
 
-    .link p {
-        font-size: 9px;
-    }
+  .link p {
+    font-size: 9px;
+  }
 }
 
 .clock {
-    width: min(90%, 500px);
-    margin: auto;
+  width: min(90%, 500px);
+  margin: auto;
 
-    padding: 35px 45px;
+  padding: 20px 45px;
 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 
-    background: rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.14);
 
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    border-radius: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 28px;
 
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    box-shadow:
-        0 18px 45px rgba(0, 0, 0, 0.18),
-        inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow:
+    0 18px 45px rgba(0, 0, 0, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35);
 }
-
-/* Date */
 
 .date {
-    margin-bottom: 7px;
+  margin-bottom: 7px;
 
-    font-size: 15px;
-    font-weight: 600;
-    letter-spacing: 2px;
-    text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
 
-    color: rgba(255, 255, 255, 0.85);
+  color: rgba(255, 255, 255, 0.85);
 }
 
-/* Time */
-
 .time h1 {
-    font-size: clamp(3rem, 8vw, 6.5rem);
-    font-weight: 700;
-    line-height: 1;
+  font-size: clamp(3rem, 8vw, 4rem);
+  font-weight: 700;
+  line-height: 1;
 
-    letter-spacing: -4px;
+  letter-spacing: -4px;
 
-    color: white;
+  color: white;
 
-    text-shadow:
-        0 5px 20px rgba(0, 0, 0, 0.2);
+  text-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
 }
 
 @media (max-width: 550px) {
-    .clock {
-        width: 90%;
-        padding: 28px 15px;
+  .clock {
+    width: 90%;
+    padding: 28px 15px;
 
-        border-radius: 22px;
-    }
+    border-radius: 22px;
+  }
 
-    .date {
-        font-size: 11px;
-        letter-spacing: 1px;
-    }
+  .date {
+    font-size: 11px;
+    letter-spacing: 1px;
+  }
 
-    .time h1 {
-        font-size: clamp(3rem, 15vw, 5rem);
-        letter-spacing: -2px;
-    }
+  .time h1 {
+    font-size: clamp(3rem, 15vw, 5rem);
+    letter-spacing: -2px;
+  }
 }
-
-/* ================= WEATHER ================= */
 
 .weather {
-    width: min(92%, 1000px);
-    margin: 0 auto;
+  width: min(92%, 1000px);
+  margin: 0 auto;
 
-    padding: 25px 30px;
+  padding: 20px;
 
-    background: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.12);
 
-    border: 1px solid rgba(255, 255, 255, 0.28);
-    border-radius: 26px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 26px;
 
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
 
-    box-shadow:
-        0 18px 45px rgba(0, 0, 0, 0.16),
-        inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  box-shadow:
+    0 18px 45px rgba(0, 0, 0, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
 
-    color: white;
+  color: white;
 }
-
-/* Location */
 
 .locationName {
-    margin-bottom: 15px;
+  margin-bottom: 15px;
 
-    font-size: 15px;
-    font-weight: 600;
-    letter-spacing: 1px;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 1px;
 
-    color: rgba(255, 255, 255, 0.8);
+  color: rgba(255, 255, 255, 0.8);
 }
 
-/* Temperature and weather description */
-
 .tempratureAndDescription {
-    display: flex;
-    align-items: center;
-    gap: 20px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
 
-    margin-bottom: 25px;
+  margin-bottom: 25px;
 }
 
 .temprature {
-    font-size: clamp(3.5rem, 7vw, 5.5rem);
-    font-weight: 700;
-    line-height: 1;
+  font-size: clamp(3rem, 7vw, 4rem);
+  font-weight: 700;
+  line-height: 1;
 
-    letter-spacing: -4px;
+  letter-spacing: -4px;
 
-    color: white;
+  color: white;
 
-    text-shadow:
-        0 5px 20px rgba(0, 0, 0, 0.2);
+  text-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
 }
 
 .description {
-    padding: 8px 15px;
+  padding: 8px 15px;
 
-    font-size: 13px;
-    font-weight: 600;
-    text-transform: capitalize;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: capitalize;
 
-    color: white;
+  color: white;
 
-    background: rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.14);
 
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 50px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50px;
 }
 
-/* Weather data cards */
-
 .data-cards {
-    display: grid;
+  display: grid;
 
-    grid-template-columns:
-        repeat(5, minmax(120px, 1fr));
+  grid-template-columns: repeat(5, minmax(120px, 1fr));
 
-    gap: 12px;
+  gap: 12px;
 }
 
 .weatherDataCard {
-    min-height: 115px;
-    padding: 17px 12px;
+  min-height: 115px;
+  padding: 17px 12px;
 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 
-    background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.1);
 
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 18px;
 
-    transition:
-        transform 0.25s ease,
-        background 0.25s ease;
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease;
 }
 
 .weatherDataCard:hover {
-    background: rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.18);
 
-    transform: translateY(-5px);
+  transform: translateY(-5px);
 }
-
-/* Weather icons */
 
 .weatherDataCard i {
-    width: 40px;
-    height: 40px;
+  width: 40px;
+  height: 40px;
 
-    margin-bottom: 8px;
+  margin-bottom: 8px;
 
-    display: grid;
-    place-items: center;
+  display: grid;
+  place-items: center;
 
-    font-size: 22px;
+  font-size: 22px;
 
-    color: #ffffff;
+  color: #ffffff;
 
-    background: rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.14);
 
-    border-radius: 13px;
+  border-radius: 13px;
 }
-
-/* Weather value */
 
 .weatherDataCard h3 {
-    margin-bottom: 5px;
+  margin-bottom: 5px;
 
-    font-size: 17px;
-    font-weight: 700;
+  font-size: 17px;
+  font-weight: 700;
 
-    color: white;
+  color: white;
 }
-
-/* Weather label */
 
 .weatherDataCard p {
-    font-size: 9px;
-    font-weight: 600;
+  font-size: 9px;
+  font-weight: 600;
 
-    letter-spacing: 1px;
+  letter-spacing: 1px;
 
-    color: rgba(255, 255, 255, 0.65);
+  color: rgba(255, 255, 255, 0.65);
 }
-
-/* ================= TABLET ================= */
 
 @media (max-width: 850px) {
-    .data-cards {
-        grid-template-columns: repeat(3, 1fr);
-    }
+  .data-cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
-
-/* ================= MOBILE ================= */
 
 @media (max-width: 550px) {
-    .weather {
-        width: 92%;
+  .weather {
+    width: 92%;
 
-        padding: 20px 15px;
+    padding: 20px 15px;
 
-        border-radius: 22px;
-    }
+    border-radius: 22px;
+  }
 
-    body{
-        gap: 0.5rem;
-    }
+  body {
+    gap: 0.5rem;
+  }
 
-    .locationName {
-        font-size: 12px;
-    }
+  .locationName {
+    font-size: 12px;
+  }
 
-    .tempratureAndDescription {
-        gap: 10px;
+  .tempratureAndDescription {
+    gap: 10px;
 
-        margin-bottom: 20px;
-    }
+    margin-bottom: 20px;
+  }
 
-    .temprature {
-        font-size: 3.5rem;
+  .temprature {
+    font-size: 3.5rem;
 
-        letter-spacing: -2px;
-    }
+    letter-spacing: -2px;
+  }
 
-    .description {
-        padding: 6px 11px;
+  .description {
+    padding: 6px 11px;
 
-        font-size: 10px;
-    }
+    font-size: 10px;
+  }
 
-    .data-cards {
-        grid-template-columns: repeat(2, 1fr);
+  .data-cards {
+    grid-template-columns: repeat(2, 1fr);
 
-        gap: 9px;
-    }
+    gap: 9px;
+  }
 
-    .weatherDataCard {
-        min-height: 100px;
+  .weatherDataCard {
+    min-height: 100px;
 
-        padding: 12px 8px;
+    padding: 12px 8px;
 
-        border-radius: 15px;
-    }
+    border-radius: 15px;
+  }
 
-    .weatherDataCard i {
-        width: 35px;
-        height: 35px;
+  .weatherDataCard i {
+    width: 35px;
+    height: 35px;
 
-        font-size: 19px;
+    font-size: 19px;
 
-        border-radius: 11px;
-    }
+    border-radius: 11px;
+  }
 
-    .weatherDataCard h3 {
-        font-size: 14px;
-    }
+  .weatherDataCard h3 {
+    font-size: 14px;
+  }
 
-    .weatherDataCard p {
-        font-size: 8px;
-    }
+  .weatherDataCard p {
+    font-size: 8px;
+  }
 
-    /* Last card takes full width */
-
-    .weatherDataCard:last-child {
-        grid-column: span 2;
-    }
+  .weatherDataCard:last-child {
+    grid-column: span 2;
+  }
 }
+

@@ -1,109 +1,208 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Focus Flow | Productivity Dashboard</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
     <link
-  href="https://cdn.jsdelivr.net/npm/remixicon@4.9.0/fonts/remixicon.css"
-  rel="stylesheet"
-/>
-</head>
-<body>
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.9.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
     <header>
-        <div class="logo">
-            <div class="logo-icon">
-                <i class="ri-flashlight-line"></i>
-            </div>
-            <div class="logo-text">
-                <h2>Focus Flow</h2>
-                <p>Productivity Dashboard</p>
-            </div>
+      <div class="logo">
+        <div class="logo-icon">
+          <i class="ri-flashlight-line"></i>
         </div>
+        <div class="logo-text">
+          <h2>Focus Flow</h2>
+          <p>Productivity Dashboard</p>
+        </div>
+      </div>
 
-        <div class="theme">
-            <i class="ri-moon-line themeIcon"></i>
-        </div>
+      <div class="theme">
+        <i class="ri-moon-line themeIcon"></i>
+      </div>
     </header>
 
     <div class="clock">
-    <div class="date"></div>
+      <div class="date"></div>
 
-    <div class="time">
+      <div class="time">
         <h1></h1>
+      </div>
     </div>
-</div>
 
-<div class="weather">
+    <div class="weather">
+      <p class="locationName">Fetching Location...</p>
 
-    <p class="locationName">
-        Fetching Location...
-    </p>
-
-    <div class="tempratureAndDescription">
-        <h1 class="temprature">
-            -- <sup>.</sup>c
-        </h1>
+      <div class="tempratureAndDescription">
+        <h1 class="temprature">-- <sup>.</sup>c</h1>
         <p class="description">Fetching Weather...</p>
+      </div>
+
+      <div class="data-cards">
+        <div class="weatherDataCard">
+          <i class="ri-drop-fill"></i>
+          <h3 class="humidity"></h3>
+          <p>HUMIDITY</p>
+        </div>
+        <div class="weatherDataCard">
+          <i class="ri-windy-line"></i>
+          <h3 class="wind"></h3>
+          <p>WIND</p>
+        </div>
+        <div class="weatherDataCard">
+          <i class="ri-temp-hot-line"></i>
+          <h3 class="feelsLike"></h3>
+          <p>FEELS LIKE</p>
+        </div>
+        <div class="weatherDataCard">
+          <i class="ri-heavy-showers-line"></i>
+          <h3 class="percipitation"></h3>
+          <p>PERCIPITATION</p>
+        </div>
+        <div class="weatherDataCard">
+          <i class="ri-sun-fill"></i>
+          <h3 class="visibility"></h3>
+          <p>VISIBILITY</p>
+        </div>
+      </div>
     </div>
 
-    <div class="data-cards">
-        <div class="weatherDataCard">
-            <i class="ri-drop-fill"></i>
-            <h3 class="humidity"></h3>
-            <p>HUMIDITY</p>
+    <main>
+      <section class="todo">
+        <button class="close-todo" aria-label="Close Todo">
+          <i class="ri-close-line" class="background-color: transparent"></i>
+        </button>
+
+        <div class="todo-container">
+          <aside class="todo-sidebar">
+            <div class="form">
+              <form id="taskForm">
+                <div class="form-heading">
+                  <div class="form-icon">
+                    <i class="ri-add-circle-line"></i>
+                  </div>
+
+                  <div>
+                    <h1>Create Task</h1>
+                    <p>Add and organize your daily tasks</p>
+                  </div>
+                </div>
+
+                <div class="input-group">
+                  <label>Task Name</label>
+
+                  <input
+                    type="text"
+                    placeholder="Enter task name..."
+                    name="task"
+                    required
+                  />
+                </div>
+
+                <div class="input-group">
+                  <label>Description</label>
+
+                  <input
+                    type="text"
+                    placeholder="Add a description..."
+                    name="description"
+                    required
+                  />
+                </div>
+
+                <div class="input-group">
+                  <label>Category</label>
+
+                  <select name="category">
+                    <option value="work">💼 Work</option>
+                    <option value="study">📚 Study</option>
+                    <option value="health">💪 Health</option>
+                    <option value="personal">👤 Personal</option>
+                    <option value="chill">🎮 Chill</option>
+                  </select>
+                </div>
+
+                <div class="form-buttons">
+                  <input type="submit" value="Add Task" name="submit" />
+
+                  <button type="button" class="cancel">Cancel</button>
+                </div>
+              </form>
+            </div>
+          </aside>
+
+          <main class="todo-content">
+            <div class="task-header">
+              <div>
+                <p class="task-small-title" style="color: var(--primary)">
+                  TASK MANAGEMENT
+                </p>
+
+                <h1 class="y-task">Your Tasks</h1>
+              </div>
+
+              <div class="task-count">
+                <span>0</span>
+                Tasks
+              </div>
+            </div>
+
+            <div class="search-box">
+              <div class="search-div">
+                <i class="ri-search-line"></i>
+
+                <input
+                  type="text"
+                  placeholder="Search your tasks..."
+                  class="search"
+                />
+              </div>
+
+              <div class="search-buttons">
+                <button type="button" class="search-btn">Search</button>
+
+                <button type="button" class="all">All</button>
+              </div>
+            </div>
+
+            <div class="tasks"></div>
+          </main>
         </div>
-        <div class="weatherDataCard">
-            <i class="ri-windy-line"></i>
-            <h3 class="wind"></h3>
-            <p>WIND</p>
-        </div>
-        <div class="weatherDataCard">
-            <i class="ri-temp-hot-line"></i>
-            <h3 class="feelsLike"></h3>
-            <p>FEELS LIKE</p>
-        </div>
-        <div class="weatherDataCard">
-            <i class="ri-heavy-showers-line"></i>
-            <h3 class="percipitation"></h3>
-            <p>PERCIPITATION</p>
-        </div>
-        <div class="weatherDataCard">
-            <i class="ri-sun-fill"></i>
-            <h3 class="visibility"></h3>
-            <p>VISIBILITY</p>
-        </div>
-    </div>
-</div>
+      </section>
+    </main>
 
     <footer>
-        <nav>
-            <div class="links">
-                <div class="link active">
-                    <i class="ri-todo-line"></i>
-                    <p>Todo</p>
-                </div>
-                <div class="link">
-                    <i class="ri-task-line"></i>
-                    <p>Daily Planner</p>
-                </div>
-                <div class="link">
-                    <i class="ri-double-quotes-l"></i>
-                    <p>Motivation Quotes</p>
-                </div>
-                <div class="link">
-                    <i class="ri-timer-line"></i>
-                    <p>Pomodoro Timer</p>
-                </div>
-                <div class="link">
-                    <i class="ri-focus-2-line"></i>
-                    <p>Daily Goals</p>
-                </div>
-            </div>
-        </nav>
+      <nav>
+        <div class="links">
+          <div class="link active todo-icon">
+            <i class="ri-todo-line"></i>
+            <p>Todo</p>
+          </div>
+          <div class="link">
+            <i class="ri-task-line"></i>
+            <p>Daily Planner</p>
+          </div>
+          <div class="link">
+            <i class="ri-double-quotes-l"></i>
+            <p>Motivation Quotes</p>
+          </div>
+          <div class="link">
+            <i class="ri-timer-line"></i>
+            <p>Pomodoro Timer</p>
+          </div>
+          <div class="link">
+            <i class="ri-focus-2-line"></i>
+            <p>Daily Goals</p>
+          </div>
+        </div>
+      </nav>
     </footer>
 
     <script src="script.js"></script>
-</body>
+  </body>
 </html>
