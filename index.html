@@ -174,6 +174,127 @@
           </main>
         </div>
       </section>
+
+
+      <section class="daily-planner">
+
+        <button
+          type="button"
+          class="close-planner"
+          aria-label="Close Daily Planner"
+        >
+          <i class="ri-close-line"></i>
+        </button>
+
+        <div class="planner-container">
+
+          <aside class="planner-sidebar">
+
+            <div class="planner-title">
+              <div class="planner-title-icon">
+                <i class="ri-calendar-schedule-line"></i>
+              </div>
+
+              <div>
+                <p>DAILY PLANNING</p>
+
+                <h1>My Planner</h1>
+              </div>
+            </div>
+
+            <div class="planner-date-card">
+              <div class="planner-date-icon">
+                <i class="ri-calendar-2-line"></i>
+              </div>
+
+              <div>
+                <span>Today's Date</span>
+
+                <h2 class="planner-date">Monday, 4 August</h2>
+              </div>
+            </div>
+
+            <form class="planner-form" id="plannerForm">
+              <h2>Add Schedule</h2>
+
+              <div class="planner-input-group">
+                <label for="planTime"> Time </label>
+
+                <input type="time" id="planTime" name="time" required />
+              </div>
+
+              <div class="planner-input-group">
+                <label for="planTask"> Activity </label>
+
+                <input
+                  type="text"
+                  id="planTask"
+                  name="task"
+                  placeholder="What are you planning?"
+                  required
+                />
+              </div>
+
+              <div class="planner-input-group">
+                <label for="planCategory"> Category </label>
+
+                <select id="planCategory" name="category">
+                  <option value="work">💼 Work</option>
+
+                  <option value="study">📚 Study</option>
+
+                  <option value="health">💪 Health</option>
+
+                  <option value="personal">👤 Personal</option>
+
+                  <option value="chill">🎮 Chill</option>
+                </select>
+              </div>
+
+              <button type="submit" class="add-plan">
+                <i class="ri-add-line"></i>
+
+                Add to Planner
+              </button>
+            </form>
+          </aside>
+
+          <main class="planner-content">
+            <div class="planner-content-header">
+              <div>
+                <p>YOUR DAILY SCHEDULE</p>
+
+                <h1>Plan Your Day</h1>
+              </div>
+
+              <div class="planner-summary">
+                <i class="ri-time-line"></i>
+
+                <span>
+                  <b class="total-hours"> 0 </b>
+
+                  Activities
+                </span>
+              </div>
+            </div>
+
+            <div class="planner-timeline">
+
+              <div class="planner-empty">
+                <div class="planner-empty-icon">
+                  <i class="ri-calendar-check-line"></i>
+                </div>
+
+                <h2>No plans yet</h2>
+
+                <p>
+                  Add an activity from the left to start organizing your day.
+                </p>
+              </div>
+            </div>
+          </main>
+        </div>
+      </section>
     </main>
 
     <footer>
@@ -183,7 +304,7 @@
             <i class="ri-todo-line"></i>
             <p>Todo</p>
           </div>
-          <div class="link">
+          <div class="link planner-icon">
             <i class="ri-task-line"></i>
             <p>Daily Planner</p>
           </div>
