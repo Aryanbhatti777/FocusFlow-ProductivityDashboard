@@ -317,13 +317,13 @@ footer {
 }
 
 .link i {
-    width: 48px;
-    height: 48px;
 
     display: grid;
     place-items: center;
 
-    font-size: 24px;
+    padding: 0.5rem;
+
+    font-size: 45px;
     color: #4f46e5;
 
     background: rgba(255, 255, 255, 0.7);
@@ -702,6 +702,10 @@ footer {
         padding: 20px 15px;
 
         border-radius: 22px;
+    }
+
+    body{
+        gap: 0.5rem;
     }
 
     .locationName {

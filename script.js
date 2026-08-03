@@ -1,3 +1,5 @@
+// Theme
+
 const theme = document.querySelector(".theme")
 
 theme.addEventListener("click", () => {
@@ -12,6 +14,8 @@ theme.addEventListener("click", () => {
         theme.innerHTML = `<i class="ri-moon-line themeIcon"></i>`
     }
 })
+
+//Date and Time
 
 const dateFormatter = new Intl.DateTimeFormat("en-US",{
         weekday: "long",
@@ -38,6 +42,8 @@ const updateTime = () => {
 };
 updateTime();
 setInterval(updateTime, 1000)
+
+//Fething location and weather based on user location
 
 const getLocation = () => {
 
@@ -100,3 +106,4 @@ const displayWeatherData = (data) => {
 
     document.querySelector(".visibility").innerHTML = `${data.visibility / 1000} kms`
 }
+
