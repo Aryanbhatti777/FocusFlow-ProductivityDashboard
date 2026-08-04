@@ -420,8 +420,85 @@ const completePlan = (planId) => {
   displayPlanners();
 };
 
+// quotes page opening closing
+const quotesPage = document.querySelector(".quotes-page");
+const quotesIcon = document.querySelector(".quotes-icon");
+const closeQuotes = document.querySelector(".close-quotes");
+
+quotesIcon.addEventListener("click", () => {
+  quotesPage.classList.add("active");
+  document.body.style.overflow = "hidden";
+});
+
+closeQuotes.addEventListener("click", () => {
+  quotesPage.classList.remove("active");
+  document.body.style.overflow = "";
+});
+
+// displayQuotes
+const quoteText = document.querySelector(".quote-text");
+const authorName = document.querySelector(".author-name");
+const newQuoteBtn = document.querySelector(".new-quote-btn");
+
+const getQuote = async () => {
+  try {
+    newQuoteBtn.disabled = true;
+    newQuoteBtn.innerHTML = `
+            <i class="ri-loader-4-line"></i> Loading... `;
+
+    const response = await fetch("https://dummyjson.com/quotes/random");
+
+    if (!response.ok) {
+      throw new Error("Could not fetch quote");
+    }
+
+    const data = await response.json();
+    quoteText.textContent = `"${data.quote}"`;
+    authorName.textContent = data.author;
+  } catch (error) {
+    console.error(error);
+    quoteText.textContent = "Unable to load a quote. Please try again.";
+    authorName.textContent = "FocusFlow";
+  } finally {
+    newQuoteBtn.disabled = false;
+    newQuoteBtn.innerHTML = `
+            <i class="ri-refresh-line"></i> New Quote`;
+  }
+};
+newQuoteBtn.addEventListener("click", getQuote);
+
+// copy quote
+
+const copyQuoteBtn = document.querySelector(".copy-quote-btn");
+
+copyQuoteBtn.addEventListener("click", async () => {
+
+  const textToCopy = `${quoteText.textContent}
+— ${authorName.textContent}`;
+
+  try {
+
+    await navigator.clipboard.writeText(textToCopy);
+    copyQuoteBtn.innerHTML = `
+            <i class="ri-check-line"></i>
+            <span>Copied</span>
+        `;
+
+    setTimeout(() => {
+      copyQuoteBtn.innerHTML = `
+                <i class="ri-file-copy-line"></i>
+                <span>Copy</span>
+            `;
+    }, 2000);
+
+  } catch (error) {
+    console.error("Could not copy quote:", error);
+  }
+
+});
 
 
 // initial Renders
 displayTasks();
 displayPlanners();
+getQuote();
