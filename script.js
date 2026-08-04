@@ -421,5 +421,7 @@ const completePlan = (planId) => {
 };
 
 
+
+// initial Renders
 displayTasks();
 displayPlanners();
