@@ -472,12 +472,10 @@ newQuoteBtn.addEventListener("click", getQuote);
 const copyQuoteBtn = document.querySelector(".copy-quote-btn");
 
 copyQuoteBtn.addEventListener("click", async () => {
-
   const textToCopy = `${quoteText.textContent}
 — ${authorName.textContent}`;
 
   try {
-
     await navigator.clipboard.writeText(textToCopy);
     copyQuoteBtn.innerHTML = `
             <i class="ri-check-line"></i>
@@ -490,13 +488,26 @@ copyQuoteBtn.addEventListener("click", async () => {
                 <span>Copy</span>
             `;
     }, 2000);
-
   } catch (error) {
     console.error("Could not copy quote:", error);
   }
-
 });
 
+// Timer opening closing
+
+const pomodoroPage = document.querySelector(".pomodoro-page");
+const openPomodoro = document.querySelector(".open-pomodoro");
+const closePomodoro = document.querySelector(".close-pomodoro");
+
+openPomodoro.addEventListener("click", () => {
+  pomodoroPage.classList.add("active");
+  document.body.style.overflow = "hidden";
+});
+
+closePomodoro.addEventListener("click", () => {
+  pomodoroPage.classList.remove("active");
+  document.body.style.overflow = "";
+});
 
 // initial Renders
 displayTasks();

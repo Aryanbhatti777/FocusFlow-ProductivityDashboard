@@ -292,11 +292,11 @@
       </section>
 
       <section class="quotes-page">
-
         <button
           type="button"
           class="close-quotes"
-          aria-label="Close quotes page">
+          aria-label="Close quotes page"
+        >
           <i class="ri-close-line"></i>
         </button>
 
@@ -375,6 +375,132 @@
           </main>
         </div>
       </section>
+
+
+      <section class="pomodoro-page">
+        <button
+          type="button"
+          class="close-pomodoro"
+          aria-label="Close Pomodoro timer">
+          <i class="ri-close-line"></i>
+        </button>
+
+        <div class="pomodoro-container">
+          <aside class="pomodoro-sidebar">
+            <div class="pomodoro-brand">
+              <div class="pomodoro-brand-icon">
+                <i class="ri-timer-line"></i>
+              </div>
+              <div>
+                <p>FOCUS SESSION</p>
+                <h1>Pomodoro</h1>
+              </div>
+            </div>
+
+            <div class="current-mode-card">
+              <div class="mode-card-icon">
+                <i class="ri-focus-3-line"></i>
+              </div>
+              <p>CURRENT MODE</p>
+              <h2>Focus Time</h2>
+              <span> Stay focused and avoid distractions. </span>
+            </div>
+
+            <div class="session-info">
+              <div class="session-info-icon">
+                <i class="ri-checkbox-circle-line"></i>
+              </div>
+              <div>
+                <span> COMPLETED SESSIONS </span>
+                <h3>
+                  <span class="session-count"> 0 </span>
+                  Today
+                </h3>
+              </div>
+            </div>
+            <div class="pomodoro-tip">
+              <i class="ri-lightbulb-line"></i>
+              <p>
+                Focus on one task at a time. Take a short break after each
+                completed session.
+              </p>
+            </div>
+          </aside>
+
+          <main class="pomodoro-content">
+            <div class="pomodoro-heading">
+              <div>
+                <p>TIME TO FOCUS</p>
+                <h1>Make Every Minute Count</h1>
+              </div>
+              <div class="timer-status">
+                <span class="status-dot"></span>
+                <span class="status-text"> Ready </span>
+              </div>
+            </div>
+            <div class="timer-modes">
+              <button type="button" class="timer-mode active" data-mode="focus">
+                <i class="ri-focus-3-line"></i>
+                Focus
+                <span> 25 min </span>
+              </button>
+              <button type="button" class="timer-mode" data-mode="short">
+                <i class="ri-cup-line"></i>
+                Short Break
+                <span> 5 min </span>
+              </button>
+              <button type="button" class="timer-mode" data-mode="long">
+                <i class="ri-leaf-line"></i>
+                Long Break
+                <span> 15 min </span>
+              </button>
+            </div>
+            <section class="timer-card">
+              <div class="timer-circle">
+                <svg class="timer-svg" viewBox="0 0 260 260">
+
+                  <circle
+                    class="timer-track"
+                    cx="130"
+                    cy="130"
+                    r="112"
+                  ></circle>
+
+                  <circle
+                    class="timer-progress"
+                    cx="130"
+                    cy="130"
+                    r="112"
+                  ></circle>
+                </svg>
+
+                <div class="timer-display">
+                  <span class="timer-time"> 25:00 </span>
+
+                  <span class="timer-label"> Focus Session </span>
+                </div>
+              </div>
+
+              <div class="pomodoro-controls">
+                <button type="button" class="start-pause-btn">
+                  <i class="ri-play-fill"></i>
+
+                  <span> Start </span>
+                </button>
+
+                <button type="button" class="reset-timer-btn">
+                  <i class="ri-restart-line"></i>
+
+                  <span> Reset </span>
+                </button>
+              </div>
+         <p class="timer-message">
+                Choose a mode and start your focus session.
+              </p>
+            </section>
+          </main>
+        </div>
+      </section>
     </main>
 
     <footer>
@@ -392,7 +518,7 @@
             <i class="ri-double-quotes-l"></i>
             <p>Motivation Quotes</p>
           </div>
-          <div class="link">
+          <div class="link open-pomodoro">
             <i class="ri-timer-line"></i>
             <p>Pomodoro Timer</p>
           </div>
