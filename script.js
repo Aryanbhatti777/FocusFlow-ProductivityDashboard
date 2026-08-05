@@ -75,69 +75,116 @@ setInterval(updateTime, 1000);
 //Fething location and weather based on user location
 
 const getLocation = () => {
-  try {
-    if (!navigator.geolocation) {
-      alert("Geolocation is not supported by your browser!");
-      return;
-    }
+  if (!navigator.geolocation) {
+    alert("Geolocation is not supported by your browser.");
+    return;
+  }
 
-    console.log("Requesting for location...");
+  console.log("Requesting location...");
 
-    navigator.geolocation.getCurrentPosition((position) => {
+  navigator.geolocation.getCurrentPosition(
+    (position) => {
       const { latitude, longitude } = position.coords;
 
+      console.log("Latitude:", latitude);
+      console.log("Longitude:", longitude);
+
       getWeatherByLocation(latitude, longitude);
-    });
-  } catch (error) {
-    alert("Internal error");
-    console.log(error);
-  }
+    },
+
+    (error) => {
+      console.error("Location error:", error);
+
+      switch (error.code) {
+        case error.PERMISSION_DENIED:
+          alert("Location permission was denied. Please allow location access.");
+          break;
+
+        case error.POSITION_UNAVAILABLE:
+          alert("Your location is currently unavailable.");
+          break;
+
+        case error.TIMEOUT:
+          alert("Location request timed out. Please try again.");
+          break;
+
+        default:
+          alert("An unknown location error occurred.");
+      }
+    },
+
+    {
+      enableHighAccuracy: true,
+      timeout: 15000,
+      maximumAge: 60000,
+    }
+  );
 };
 
-getLocation();
 
-const getWeatherByLocation = async (lat, long) => {
-  if (!lat || !long) {
-    alert("Unable to get coordinates");
+const getWeatherByLocation = async (lat, lon) => {
+  if (lat == null || lon == null) {
+    alert("Unable to get coordinates.");
+    return;
   }
 
   try {
-    const URL = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=fbe8226654b37662db331caad38f0810&units=metric`;
+    const URL =
+      `https://api.openweathermap.org/data/2.5/weather` +
+      `?lat=${lat}` +
+      `&lon=${lon}` +
+      `&appid=YOUR_API_KEY` +
+      `&units=metric`;
 
     const response = await fetch(URL);
 
-    if (!response.ok) throw new Error("Weather data not found");
+    if (!response.ok) {
+      throw new Error(
+        `Weather request failed: ${response.status}`
+      );
+    }
 
     const data = await response.json();
+
+    console.log("Weather data:", data);
+
     displayWeatherData(data);
+
   } catch (error) {
-    alert("Some error occured fetching data !");
-    console.log(error.message);
+    console.error("Weather error:", error);
+    alert("Unable to fetch weather data.");
   }
 };
 
+
 const displayWeatherData = (data) => {
-  document.querySelector(".locationName").innerHTML = data.name;
+  document.querySelector(".locationName").textContent =
+    data.name || "Unknown location";
 
-  document.querySelector(".temprature").innerHTML = `${data.main.temp}°C`;
+  document.querySelector(".temprature").textContent =
+    `${Math.round(data.main.temp)}°C`;
 
-  document.querySelector(".description").innerHTML =
-    data.weather[0].description;
+  document.querySelector(".description").textContent =
+    data.weather?.[0]?.description || "No description";
 
-  document.querySelector(".humidity").innerHTML = `${data.main.humidity}%`;
+  document.querySelector(".humidity").textContent =
+    `${data.main.humidity}%`;
 
-  document.querySelector(".wind").innerHTML = `${(
-    data.wind.speed * 3.6
-  ).toFixed(2)} km/h`;
+  document.querySelector(".wind").textContent =
+    `${(data.wind.speed * 3.6).toFixed(1)} km/h`;
 
-  document.querySelector(".feelsLike").innerHTML = `${data.main.feels_like}°C`;
+  document.querySelector(".feelsLike").textContent =
+    `${Math.round(data.main.feels_like)}°C`;
 
-  document.querySelector(".percipitation").innerHTML =
-    `${data.rain ? data.rain["1h"] : 0} mm`;
+  document.querySelector(".percipitation").textContent =
+    `${data.rain?.["1h"] ?? 0} mm`;
 
-  document.querySelector(".visibility").innerHTML =
-    `${data.visibility / 1000} kms`;
+  document.querySelector(".visibility").textContent =
+    `${((data.visibility ?? 0) / 1000).toFixed(1)} km`;
 };
+
+
+getLocation();
 
 // Todo app closing opening
 const todoPage = document.querySelector(".todo");
