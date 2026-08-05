@@ -133,7 +133,7 @@ const getWeatherByLocation = async (lat, lon) => {
       `https://api.openweathermap.org/data/2.5/weather` +
       `?lat=${lat}` +
       `&lon=${lon}` +
-      `&appid=YOUR_API_KEY` +
+      `&appid=61fa14bb69cb911e7c78cfd3d2a4a6d0` +
       `&units=metric`;
 
     const response = await fetch(URL);
