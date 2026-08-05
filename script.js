@@ -740,6 +740,201 @@ const completeTimer = () => {
 
 
 
+// goals working
+
+const goalForm = document.querySelector("#goalForm");
+
+goalForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  const goal = goalForm.goal.value.trim();
+  const goals = getGoals();
+
+  if (!goal) {
+    alert("Field is mandatory.");
+  }
+
+  const newGoal = {
+    id: Date.now(),
+    goal,
+    completed: false,
+  };
+
+  goals.push(newGoal);
+
+  localStorage.setItem("goals", JSON.stringify(goals));
+
+  displayGoals();
+
+  goalForm.reset();
+});
+
+let currentFilter = "all";
+
+const displayGoals = (goals = getGoals()) => {
+  const goalsDiv = document.querySelector(".goals-list");
+  goalsDiv.innerHTML = "";
+
+  const goalCount = document.querySelector(".total-goals-header");
+  const goalsEmpty = document.querySelector(".goals-empty");
+
+  goalCount.innerHTML = goals.length;
+
+  const filteredGoals = goals.filter((goal) => {
+    if (currentFilter === "active") {
+      return !goal.completed;
+    }
+
+    if (currentFilter === "completed") {
+      return goal.completed;
+    }
+    return true;
+  });
+
+  if (filteredGoals.length === 0) {
+    goalsEmpty.classList.add("show");
+  } else {
+    goalsEmpty.classList.remove("show");
+  }
+
+  filteredGoals.forEach((goal) => {
+    let div = document.createElement("div");
+    div.classList.add("goal-item");
+
+    if (goal.completed) {
+      div.classList.add("completed");
+    }
+
+    div.innerHTML = `
+                <button type="button" class="goal-check" aria-label="Complete goal">
+                    <i class=" ri-check-line"></i>
+                </button>
+                <p class="goal-text">
+                    ${goal.goal}
+                </p>
+                <button
+                    type="button"
+                    class="goal-delete"
+                    aria-label="Delete goal">
+                    <i class="ri-delete-bin-line"></i>
+                </button>
+            `;
+
+    div.querySelector(".goal-delete").addEventListener("click", () => {
+      deleteGoal(goal.id);
+    });
+
+    div.querySelector(".goal-check").addEventListener("click", () => {
+      toggleGoal(goal.id);
+    });
+
+    goalsDiv.append(div);
+  });
+
+  updateGoalProgress();
+};
+
+// filter goals
+const goalFilters = document.querySelectorAll(".goal-filter");
+goalFilters.forEach((filterButton) => {
+  filterButton.addEventListener("click", () => {
+    currentFilter = filterButton.dataset.filter;
+
+    goalFilters.forEach((button) => {
+      button.classList.remove("active");
+    });
+
+    filterButton.classList.add("active");
+
+    displayGoals();
+  });
+});
+
+// delete Goals
+
+const deleteGoal = (goalId) => {
+  let goals = getGoals();
+  const remainingGoals = goals.filter((g) => g.id !== goalId);
+  localStorage.setItem("goals", JSON.stringify(remainingGoals));
+
+  displayGoals();
+  updateGoalProgress();
+};
+
+// complete Goals
+
+const toggleGoal = (goalId) => {
+  const goals = getGoals();
+
+  const updatedGoals = goals.map((goal) => {
+    if (goal.id === goalId) {
+      return {
+        ...goal,
+
+        completed: !goal.completed,
+      };
+    }
+
+    return goal;
+  });
+
+  localStorage.setItem("goals", JSON.stringify(updatedGoals));
+
+  displayGoals();
+  updateGoalProgress();
+};
+
+const updateGoalProgress = () => {
+  const totalGoals = getGoals();
+  const completedGoals = totalGoals.filter((goals) => {
+    return goals.completed;
+  });
+
+  let percentage = 0;
+  percentage = Math.floor((completedGoals.length / totalGoals.length) * 100);
+
+  const cGoals = document.querySelector(".completed-goals");
+  cGoals.textContent = completedGoals.length;
+  const tGoals = document.querySelector(".total-goals");
+  tGoals.textContent = totalGoals.length;
+  const pPercentage = document.querySelector(".progress-percentage");
+
+  if (totalGoals.length === 0) {
+    pPercentage.textContent = "0%";
+  } else {
+    pPercentage.textContent = `${percentage}%`;
+  }
+
+  const progress = document.querySelector(".goals-progress-fill");
+
+  progress.style.width = `${percentage}%`;
+
+  const progressMessage = document.querySelector(".progress-message");
+
+  if (totalGoals.length === 0) {
+    progressMessage.textContent = "Add your first goal for today!";
+  } else if (completedGoals.length === totalGoals.length) {
+    progressMessage.textContent = "Amazing! You completed all your goals 🎉";
+  } else {
+    const remaining = totalGoals.length - completedGoals.length;
+
+    progressMessage.textContent = `${remaining} goal${
+      remaining === 1 ? "" : "s"
+    } remaining`;
+  }
+};
+
+const updateGoalsDate = () => {
+  const goalsDate = document.querySelector(".goals-date");
+  const today = new Date();
+
+  goalsDate.textContent = today.toLocaleDateString("en-IN", {
+    weekday: "long",
+    month: "long",
+    day: "numeric",
+  });
+};
+
 // initial Renders
 displayTasks();
 displayPlanners();
