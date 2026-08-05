@@ -15,7 +15,19 @@ const getGoals = () => {
   return goals;
 };
 // Theme and background
+const body = document.querySelector("body")
+let hour = new Date().getHours();
+console.log(hour)
 
+if(hour >=4 && hour < 10){
+  body.style.backgroundColor = `url("./assets/morning.jpg")`
+}else if(hour >= 10 && hour <16){
+  body.style.backgroundImage = `url("./assets/noon.jpg")`
+}else if(hour >= 16 && hour <= 20){
+  body.style.backgroundImage = `url("./assets/night.jpg")`
+}else{
+  body.style.backgroundImage = `url("./assets/morning.jpg")`
+}
 
 
 const theme = document.querySelector(".theme");
