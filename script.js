@@ -9,7 +9,14 @@ const getPlanners = () => {
 
   return planners;
 };
-// Theme
+
+const getGoals = () => {
+  const goals = JSON.parse(localStorage.getItem("goals")) || [];
+  return goals;
+};
+// Theme and background
+
+
 
 const theme = document.querySelector(".theme");
 
@@ -209,10 +216,11 @@ const displayTasks = (planners = getTasks()) => {
             <button
                 type="button"
                 class="complete-task" >
-                <i class="${task.completed
-        ? "ri-checkbox-circle-fill"
-        : "ri-checkbox-circle-line"
-      }"></i>
+                <i class="${
+                  task.completed
+                    ? "ri-checkbox-circle-fill"
+                    : "ri-checkbox-circle-line"
+                }"></i>
 
                 ${task.completed ? "Undo" : "Complete"}
 
@@ -336,11 +344,22 @@ plannerForm.addEventListener("submit", (e) => {
 
 const displayPlanners = () => {
   const plannersDiv = document.querySelector(".planner-timeline");
-  plannersDiv.innerHTML = "";
+  const plannerEmpty = document.querySelector(".planner-empty");
 
   const planners = getPlanners();
   const plannerCount = document.querySelector(".total-hours");
   plannerCount.innerHTML = planners.length;
+  if (planners.length === 0) {
+    plannerEmpty.classList.add("show");
+  } else {
+    plannerEmpty.classList.remove("show");
+  }
+
+  const oldPlannerItems = plannersDiv.querySelectorAll(".planner-item");
+
+  oldPlannerItems.forEach((item) => {
+    item.remove();
+  });
 
   planners.forEach((plan) => {
     const div = document.createElement("div");
@@ -375,10 +394,11 @@ const displayPlanners = () => {
             <button
                 type="button"
                 class="complete-plan">
-                <i class="${plan.completed
-        ? "ri-checkbox-circle-fill"
-        : "ri-checkbox-circle-line"
-      }"></i>
+                <i class="${
+                  plan.completed
+                    ? "ri-checkbox-circle-fill"
+                    : "ri-checkbox-circle-line"
+                }"></i>
                 ${plan.completed ? "Completed" : "Mark as Complete"}
             </button>
         </div>
@@ -391,7 +411,6 @@ const displayPlanners = () => {
     div.querySelector(".complete-plan").addEventListener("click", () => {
       completePlan(plan.id);
     });
-
     plannersDiv.append(div);
   });
 };
@@ -507,86 +526,47 @@ closePomodoro.addEventListener("click", () => {
   document.body.style.overflow = "";
 });
 
+// timer working
 
-const timerTime = document.querySelector(
-    ".timer-time"
+const timerTime = document.querySelector(".timer-time");
+const timerLabel = document.querySelector(".timer-label");
+const timerMessage = document.querySelector(".timer-message");
+const timerProgress = document.querySelector(".timer-progress");
+const startPauseBtn = document.querySelector(".start-pause-btn");
+const resetTimerBtn = document.querySelector(".reset-timer-btn");
+const timerModeButtons = document.querySelectorAll(".timer-mode");
+const statusText = document.querySelector(".status-text");
+const statusDot = document.querySelector(".status-dot");
+const sessionCount = document.querySelector(".session-count");
+const currentModeTitle = document.querySelector(".current-mode-card h2");
+const currentModeDescription = document.querySelector(
+  ".current-mode-card > span",
 );
-
-const timerLabel = document.querySelector(
-    ".timer-label"
-);
-
-const timerMessage = document.querySelector(
-    ".timer-message"
-);
-
-const timerProgress = document.querySelector(
-    ".timer-progress"
-);
-
-const startPauseBtn = document.querySelector(
-    ".start-pause-btn"
-);
-
-const resetTimerBtn = document.querySelector(
-    ".reset-timer-btn"
-);
-
-const timerModeButtons = document.querySelectorAll(
-    ".timer-mode"
-);
-
-const statusText = document.querySelector(
-    ".status-text"
-);
-
-const statusDot = document.querySelector(
-    ".status-dot"
-);
-
-const sessionCount = document.querySelector(
-    ".session-count"
-);
-
-const currentModeTitle = document.querySelector(
-    ".current-mode-card h2"
-);
-
-const currentModeDescription =
-    document.querySelector(
-        ".current-mode-card > span"
-    );
-
-const currentModeIcon =
-    document.querySelector(
-        ".mode-card-icon i"
-    );
+const currentModeIcon = document.querySelector(".mode-card-icon i");
 
 const timerModes = {
-
-    focus: {
-        duration: 25 * 60,
-        title: "Focus Time",
-        label: "Focus Session",
-        description: "Stay focused and avoid distractions.",
-        icon: "ri-focus-3-line"
-    },
-    short: {
-        duration: 5 * 60,
-        title: "Short Break",
-        label: "Short Break",
-        description:"Take a moment to relax and recharge.",
-        icon: "ri-cup-line"
-    },
-    long: {
-        duration: 15 * 60,
-        title: "Long Break",
-        label: "Long Break",
-        description: "Rest, refresh, and prepare for more focus.",
-        icon: "ri-leaf-line"
-    }
+  focus: {
+    duration: 25 * 60,
+    title: "Focus Time",
+    label: "Focus Session",
+    description: "Stay focused and avoid distractions.",
+    icon: "ri-focus-3-line",
+  },
+  short: {
+    duration: 5 * 60,
+    title: "Short Break",
+    label: "Short Break",
+    description: "Take a moment to relax and recharge.",
+    icon: "ri-cup-line",
+  },
+  long: {
+    duration: 15 * 60,
+    title: "Long Break",
+    label: "Long Break",
+    description: "Rest, refresh, and prepare for more focus.",
+    icon: "ri-leaf-line",
+  },
 };
-
 
 let currentMode = "focus";
 let timeLeft = timerModes.focus.duration;
@@ -600,205 +580,171 @@ timerProgress.style.strokeDasharray = circleCircumference;
 timerProgress.style.strokeDashoffset = 0;
 
 const formatTime = (seconds) => {
-    const minutes = Math.floor(
-        seconds / 60
-    );
-    const remainingSeconds =
-        seconds % 60;
-    const formattedMinutes =
-        String(minutes).padStart(2, "0" );
-    const formattedSeconds =
-        String(remainingSeconds).padStart(2, "0");
-    return `
+  const minutes = Math.floor(seconds / 60);
+  const remainingSeconds = seconds % 60;
+  const formattedMinutes = String(minutes).padStart(2, "0");
+  const formattedSeconds = String(remainingSeconds).padStart(2, "0");
+  return `
         ${formattedMinutes}:
         ${formattedSeconds}
-    `.replace( /\s/g, "" );
-
+    `.replace(/\s/g, "");
 };
 
 const updateTimerDisplay = () => {
-    timerTime.textContent = formatTime(timeLeft);
+  timerTime.textContent = formatTime(timeLeft);
 };
 
 const updateTimerProgress = () => {
-    const totalDuration = timerModes[currentMode].duration;
-    const percentage = timeLeft / totalDuration;
-    const offset = circleCircumference *(1 - percentage);
-    timerProgress.style.strokeDashoffset = offset;
-
+  const totalDuration = timerModes[currentMode].duration;
+  const percentage = timeLeft / totalDuration;
+  const offset = circleCircumference * (1 - percentage);
+  timerProgress.style.strokeDashoffset = offset;
 };
 
 const updateMainButton = () => {
-
-    if ( timerState === "running" ) {
-        startPauseBtn.innerHTML = `
+  if (timerState === "running") {
+    startPauseBtn.innerHTML = `
             <i class="ri-pause-fill"></i>
             <span>Pause</span>
         `;
-    }
-    else if ( timerState === "paused" ) {
-        startPauseBtn.innerHTML = `
+  } else if (timerState === "paused") {
+    startPauseBtn.innerHTML = `
             <i class="ri-play-fill"></i>
             <span>Resume</span>
         `;
-    }
-    else {
-        startPauseBtn.innerHTML = `
+  } else {
+    startPauseBtn.innerHTML = `
             <i class="ri-play-fill"></i>
             <span> Start</span>
         `;
-    }
+  }
 };
 
 const updateStatus = () => {
-
-    if ( timerState === "running") {
-        statusText.textContent ="Running";
-        statusDot.style.background = "#22c55e";
-
-    }
-    else if ( timerState === "paused") {
-        statusText.textContent ="Paused";
-        statusDot.style.background ="#f59e0b";
-    }
-    else if ( timerState === "completed" ) {
-        statusText.textContent ="Completed";
-        statusDot.style.background = "#22c55e";
-    }
-    else {
-        statusText.textContent = "Ready";
-        statusDot.style.background ="var(--muted)";
-    }
+  if (timerState === "running") {
+    statusText.textContent = "Running";
+    statusDot.style.background = "#22c55e";
+  } else if (timerState === "paused") {
+    statusText.textContent = "Paused";
+    statusDot.style.background = "#f59e0b";
+  } else if (timerState === "completed") {
+    statusText.textContent = "Completed";
+    statusDot.style.background = "#22c55e";
+  } else {
+    statusText.textContent = "Ready";
+    statusDot.style.background = "var(--muted)";
+  }
 };
 
 const updateTimerMessage = () => {
-
-    if ( timerState === "running") {
-        timerMessage.textContent = "Stay focused. You are doing great!";
-    }
-    else if (timerState === "paused") {
-        timerMessage.textContent ="Your session is paused.";
-    }
-    else if (timerState === "completed") {
-        timerMessage.textContent = "Great work! Your session is complete.";
-    }
-    else {
-        timerMessage.textContent = "Choose a mode and start your session.";
-    }
+  if (timerState === "running") {
+    timerMessage.textContent = "Stay focused. You are doing great!";
+  } else if (timerState === "paused") {
+    timerMessage.textContent = "Your session is paused.";
+  } else if (timerState === "completed") {
+    timerMessage.textContent = "Great work! Your session is complete.";
+  } else {
+    timerMessage.textContent = "Choose a mode and start your session.";
+  }
 };
 
 const updateUI = () => {
-
-    updateTimerDisplay();
-    updateTimerProgress();
-    updateMainButton();
-    updateStatus();
-    updateTimerMessage();
+  updateTimerDisplay();
+  updateTimerProgress();
+  updateMainButton();
+  updateStatus();
+  updateTimerMessage();
 };
 
 const startTimer = () => {
-
-    if ( timerState === "running") {
-        return;
-    }
-    timerState = "running";
-    updateUI();
-    timerInterval = setInterval(runTimer, 1000);
+  if (timerState === "running") {
+    return;
+  }
+  timerState = "running";
+  updateUI();
+  timerInterval = setInterval(runTimer, 1000);
 };
 
 const runTimer = () => {
-
-    if ( timeLeft > 0) {
-        timeLeft--;
-        updateTimerDisplay();
-        updateTimerProgress();
-    }
-    if ( timeLeft === 0) {
-        completeTimer();
-    }
+  if (timeLeft > 0) {
+    timeLeft--;
+    updateTimerDisplay();
+    updateTimerProgress();
+  }
+  if (timeLeft === 0) {
+    completeTimer();
+  }
 };
 
 const pauseTimer = () => {
-    clearInterval( timerInterval );
-    timerInterval = null;
-    timerState = "paused";
-    updateUI();
+  clearInterval(timerInterval);
+  timerInterval = null;
+  timerState = "paused";
+  updateUI();
 };
 
-startPauseBtn.addEventListener(
-    "click",
-    () => {
-        if ( timerState === "running") {
-            pauseTimer();
-        } else {
-            startTimer();
-        }
-    }
-);
+startPauseBtn.addEventListener("click", () => {
+  if (timerState === "running") {
+    pauseTimer();
+  } else {
+    startTimer();
+  }
+});
 
 const resetTimer = () => {
-
-    clearInterval(timerInterval);
-    timerInterval = null;
-    timeLeft =timerModes[currentMode].duration;
-    timerState = "idle";
-    updateUI();
+  clearInterval(timerInterval);
+  timerInterval = null;
+  timeLeft = timerModes[currentMode].duration;
+  timerState = "idle";
+  updateUI();
 };
 
-resetTimerBtn.addEventListener(
-    "click",
-    resetTimer
-);
+resetTimerBtn.addEventListener("click", resetTimer);
 
-timerModeButtons.forEach(
-    (button) => {
-        button.addEventListener( "click",() => {
+timerModeButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    clearInterval(timerInterval);
+    timerInterval = null;
+    currentMode = button.dataset.mode;
+    timeLeft = timerModes[currentMode].duration;
+    timerState = "idle";
 
-                clearInterval( timerInterval );
-                timerInterval = null;
-                currentMode = button.dataset.mode;
-                timeLeft = timerModes[ currentMode ].duration;
-                timerState = "idle";
+    timerModeButtons.forEach((modeButton) => {
+      modeButton.classList.remove("active");
+    });
 
-                timerModeButtons.forEach((modeButton) => {
-                        modeButton.classList.remove("active");
-                    }
-                );
-
-                button.classList.add( "active");
-                updateCurrentModeCard();
-                updateUI();
-            }
-        );
-    }
-);
+    button.classList.add("active");
+    updateCurrentModeCard();
+    updateUI();
+  });
+});
 
 const updateCurrentModeCard = () => {
-
-    const selectedMode = timerModes[ currentMode];
-    currentModeTitle.textContent = selectedMode.title;
-    currentModeDescription.textContent = selectedMode.description;
-    currentModeIcon.className = selectedMode.icon;
-
+  const selectedMode = timerModes[currentMode];
+  currentModeTitle.textContent = selectedMode.title;
+  currentModeDescription.textContent = selectedMode.description;
+  currentModeIcon.className = selectedMode.icon;
 };
 
 const completeTimer = () => {
+  clearInterval(timerInterval);
+  timerInterval = null;
+  timerState = "completed";
 
-    clearInterval(timerInterval);
-    timerInterval = null;
-    timerState ="completed";
+  if (currentMode === "focus") {
+    completedSessions++;
+    sessionCount.textContent = completedSessions;
+  }
+  updateUI();
+};
 
-    if (currentMode === "focus") {
 
-        completedSessions++;
-        sessionCount.textContent = completedSessions;
-    }
-    updateUI();
-}; 
 
 // initial Renders
 displayTasks();
 displayPlanners();
 getQuote();
 updateCurrentModeCard();
-updateUI(); 
+updateUI();
+displayGoals();
+updateGoalProgress();

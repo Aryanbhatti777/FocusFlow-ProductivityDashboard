@@ -1350,11 +1350,15 @@ body.dark .task:hover {
 
 .planner-empty {
   min-height: 430px;
-  display: flex;
+  display: none;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
+}
+
+.planner-empty.show{
+  display: flex;
 }
 
 .planner-empty-icon {
@@ -2739,3 +2743,4 @@ body.dark .close-pomodoro:hover {
         height: 43px;
     }
 }
+

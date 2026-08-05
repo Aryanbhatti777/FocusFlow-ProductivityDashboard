@@ -376,12 +376,12 @@
         </div>
       </section>
 
-
       <section class="pomodoro-page">
         <button
           type="button"
           class="close-pomodoro"
-          aria-label="Close Pomodoro timer">
+          aria-label="Close Pomodoro timer"
+        >
           <i class="ri-close-line"></i>
         </button>
 
@@ -458,7 +458,6 @@
             <section class="timer-card">
               <div class="timer-circle">
                 <svg class="timer-svg" viewBox="0 0 260 260">
-
                   <circle
                     class="timer-track"
                     cx="130"
@@ -494,10 +493,129 @@
                   <span> Reset </span>
                 </button>
               </div>
-         <p class="timer-message">
+              <p class="timer-message">
                 Choose a mode and start your focus session.
               </p>
             </section>
+          </main>
+        </div>
+      </section>
+
+      <section class="daily-goals-page">
+        <button
+          type="button"
+          class="close-goals"
+          aria-label="Close Daily Goals"
+        >
+          <i class="ri-close-line"></i>
+        </button>
+
+        <div class="goals-container">
+          <aside class="goals-sidebar">
+            <div class="goals-heading">
+              <div class="goals-icon">
+                <i class="ri-flag-2-line"></i>
+              </div>
+              <div>
+                <p>FOCUSFLOW</p>
+                <h1>Daily Goals</h1>
+              </div>
+            </div>
+            <p class="goals-description">
+              Set clear goals, stay focused, and make progress every day.
+            </p>
+
+            <div class="goals-progress-card">
+              <div class="progress-heading">
+                <div>
+                  <p>Today's Progress</p>
+                  <h2>
+                    <span class="completed-goals"> 0 </span>
+                    /
+                    <span class="total-goals"> 0 </span>
+                  </h2>
+                </div>
+                <div class="progress-percentage">0%</div>
+              </div>
+
+              <div class="goals-progress-bar">
+                <div class="goals-progress-fill"></div>
+              </div>
+              <p class="progress-message">Add your first goal for today!</p>
+            </div>
+
+            <div class="goal-tip">
+              <i class="ri-lightbulb-line"></i>
+              <div>
+                <h3>Daily Tip</h3>
+                <p>Keep your goals small, clear, and achievable.</p>
+              </div>
+            </div>
+          </aside>
+
+          <main class="goals-content">
+            <div class="goals-content-header">
+              <div>
+                <p class="goals-date">Monday, August 4</p>
+                <h1>Your Goals</h1>
+                <p>What do you want to achieve today?</p>
+              </div>
+              <div class="goals-count">
+                <i class="ri-checkbox-circle-line"></i>
+                <span>
+                  <span class="total-goals-header"> 0 </span>
+                  Goals
+                </span>
+              </div>
+            </div>
+
+            <form class="add-goal-form" id="goalForm">
+              <div class="goal-input">
+                <i class="ri-add-circle-line"></i>
+                <input
+                  type="text"
+                  id="goalInput"
+                  placeholder="Add a new goal..."
+                  autocomplete="off"
+                  name="goal"
+                  required
+                />
+              </div>
+              <button type="submit">
+                <i class="ri-add-line"></i>
+
+                Add Goal
+              </button>
+            </form>
+
+            <div class="goal-filters">
+              <button
+                type="button"
+                class="goal-filter active allgoals"
+                data-filter="all"
+              >
+                All
+              </button>
+              <button type="button" class="goal-filter" data-filter="active">
+                Active
+              </button>
+              <button type="button" class="goal-filter" data-filter="completed">
+                Completed
+              </button>
+            </div>
+
+            <div class="goals-list">
+            </div>
+
+            <div class="goals-empty">
+              <div>
+                <i class="ri-flag-line"></i>
+              </div>
+
+              <h2>No goals found</h2>
+
+              <p>Add a goal and start making progress today.</p>
+            </div>
           </main>
         </div>
       </section>
@@ -522,7 +640,7 @@
             <i class="ri-timer-line"></i>
             <p>Pomodoro Timer</p>
           </div>
-          <div class="link">
+          <div class="link open-goals">
             <i class="ri-focus-2-line"></i>
             <p>Daily Goals</p>
           </div>
