@@ -738,7 +738,23 @@ const completeTimer = () => {
   updateUI();
 };
 
+// daily goals opening closing
 
+const openGoalsButton = document.querySelector(".open-goals");
+const closeGoalsButton = document.querySelector(".close-goals");
+const dailyGoalsPage = document.querySelector(".daily-goals-page");
+
+openGoalsButton.addEventListener("click", () => {
+  dailyGoalsPage.classList.add("active");
+  document.body.style.overflow = "hidden";
+});
+
+const closeGoals = () => {
+  dailyGoalsPage.classList.remove("active");
+  document.body.style.overflow = "";
+};
+
+closeGoalsButton.addEventListener("click", closeGoals);
 
 // goals working
 
