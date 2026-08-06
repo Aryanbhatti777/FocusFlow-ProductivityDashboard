@@ -20,13 +20,13 @@ let hour = new Date().getHours();
 console.log(hour)
 
 if(hour >=4 && hour < 10){
-  body.style.backgroundColor = `url("./assets/morning.jpg")`
+  body.style.backgroundImage = `url("./assets/morning.jpg")`
 }else if(hour >= 10 && hour <16){
   body.style.backgroundImage = `url("./assets/noon.jpg")`
-}else if(hour >= 16 && hour <= 20){
-  body.style.backgroundImage = `url("./assets/night.jpg")`
+}else if(hour >= 16 && hour <= 22){
+  body.style.backgroundImage = `url("./assets/evening.jpg")`
 }else{
-  body.style.backgroundImage = `url("./assets/morning.jpg")`
+  body.style.backgroundImage = `url("./assets/night.jpg")`
 }
 
 
@@ -97,6 +97,7 @@ const getLocation = () => {
 
       switch (error.code) {
         case error.PERMISSION_DENIED:
+          
           alert("Location permission was denied. Please allow location access.");
           break;
 
