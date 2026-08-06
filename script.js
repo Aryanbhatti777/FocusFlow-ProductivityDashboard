@@ -15,20 +15,19 @@ const getGoals = () => {
   return goals;
 };
 // Theme and background
-const body = document.querySelector("body")
+const body = document.querySelector("body");
 let hour = new Date().getHours();
-console.log(hour)
+console.log(hour);
 
-if(hour >=4 && hour < 10){
-  body.style.backgroundImage = `url("./assets/morning.jpg")`
-}else if(hour >= 10 && hour <16){
-  body.style.backgroundImage = `url("./assets/noon.jpg")`
-}else if(hour >= 16 && hour <= 22){
-  body.style.backgroundImage = `url("./assets/evening.jpg")`
-}else{
-  body.style.backgroundImage = `url("./assets/night.jpg")`
+if (hour >= 4 && hour < 10) {
+  body.style.backgroundImage = `url("./assets/morning.jpg")`;
+} else if (hour >= 10 && hour < 16) {
+  body.style.backgroundImage = `url("./assets/noon.jpg")`;
+} else if (hour >= 16 && hour <= 22) {
+  body.style.backgroundImage = `url("./assets/evening.jpg")`;
+} else {
+  body.style.backgroundImage = `url("./assets/night.jpg")`;
 }
-
 
 const theme = document.querySelector(".theme");
 
@@ -97,8 +96,9 @@ const getLocation = () => {
 
       switch (error.code) {
         case error.PERMISSION_DENIED:
-          
-          alert("Location permission was denied. Please allow location access.");
+          alert(
+            "Location permission was denied. Please allow location access.",
+          );
           break;
 
         case error.POSITION_UNAVAILABLE:
@@ -118,10 +118,9 @@ const getLocation = () => {
       enableHighAccuracy: true,
       timeout: 15000,
       maximumAge: 60000,
-    }
+    },
   );
 };
-
 
 const getWeatherByLocation = async (lat, lon) => {
   if (lat == null || lon == null) {
@@ -130,15 +129,12 @@ const getWeatherByLocation = async (lat, lon) => {
   }
 
   try {
-    const URL =
-      `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=61fa14bb69cb911e7c78cfd3d2a4a6d0&units=metric`;
+    const URL = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=61fa14bb69cb911e7c78cfd3d2a4a6d0&units=metric`;
 
     const response = await fetch(URL);
 
     if (!response.ok) {
-      throw new Error(
-        `Weather request failed: ${response.status}`
-      );
+      throw new Error(`Weather request failed: ${response.status}`);
     }
 
     const data = await response.json();
@@ -146,13 +142,11 @@ const getWeatherByLocation = async (lat, lon) => {
     console.log("Weather data:", data);
 
     displayWeatherData(data);
-
   } catch (error) {
     console.error("Weather error:", error);
     alert("Unable to fetch weather data.");
   }
 };
-
 
 const displayWeatherData = (data) => {
   document.querySelector(".locationName").textContent =
@@ -164,8 +158,7 @@ const displayWeatherData = (data) => {
   document.querySelector(".description").textContent =
     data.weather?.[0]?.description || "No description";
 
-  document.querySelector(".humidity").textContent =
-    `${data.main.humidity}%`;
+  document.querySelector(".humidity").textContent = `${data.main.humidity}%`;
 
   document.querySelector(".wind").textContent =
     `${(data.wind.speed * 3.6).toFixed(1)} km/h`;
@@ -179,7 +172,6 @@ const displayWeatherData = (data) => {
   document.querySelector(".visibility").textContent =
     `${((data.visibility ?? 0) / 1000).toFixed(1)} km`;
 };
-
 
 getLocation();
 
