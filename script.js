@@ -17,7 +17,6 @@ const getGoals = () => {
 // Theme and background
 const body = document.querySelector("body");
 let hour = new Date().getHours();
-console.log(hour);
 
 if (hour >= 4 && hour < 10) {
   body.style.backgroundImage = `url("./assets/morning.jpg")`;
@@ -84,10 +83,6 @@ const getLocation = () => {
   navigator.geolocation.getCurrentPosition(
     (position) => {
       const { latitude, longitude } = position.coords;
-
-      console.log("Latitude:", latitude);
-      console.log("Longitude:", longitude);
-
       getWeatherByLocation(latitude, longitude);
     },
 
@@ -138,8 +133,6 @@ const getWeatherByLocation = async (lat, lon) => {
     }
 
     const data = await response.json();
-
-    console.log("Weather data:", data);
 
     displayWeatherData(data);
   } catch (error) {
